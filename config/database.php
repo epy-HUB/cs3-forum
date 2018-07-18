@@ -1,5 +1,12 @@
 <?php
 
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+$host = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$database = substr($url["path"], 1);
+
 return [
 
     /*
@@ -54,27 +61,37 @@ return [
         //     'engine' => null,
         // ],
         'mysql' => [
-            'driver' => 'mysql',
-            'host' => env('DB_HOST', 'db4free.net'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'tuitt_night'),
-            'username' => env('DB_USERNAME', 'tuitt_night'),
-            'password' => env('DB_PASSWORD', 'tuitt_night'),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'strict' => true,
-            'engine' => null,
-			'modes'  => [
-            'ONLY_FULL_GROUP_BY',
-            'STRICT_TRANS_TABLES',
-            'NO_ZERO_IN_DATE',
-            'NO_ZERO_DATE',
-            'ERROR_FOR_DIVISION_BY_ZERO',
-            'NO_ENGINE_SUBSTITUTION',
-			],
+            'driver'    => 'mysql',
+            'host'      => $host,
+            'database'  => $database,
+            'username'  => $username,
+            'password'  => $password,
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
         ],
+        // 'mysql' => [
+        //     'driver' => 'mysql',
+        //     'host' => env('DB_HOST', 'db4free.net'),
+        //     'port' => env('DB_PORT', '3306'),
+        //     'database' => env('DB_DATABASE', 'tuitt_night'),
+        //     'username' => env('DB_USERNAME', 'tuitt_night'),
+        //     'password' => env('DB_PASSWORD', 'tuitt_night'),
+        //     'unix_socket' => env('DB_SOCKET', ''),
+        //     'charset' => 'utf8mb4',
+        //     'collation' => 'utf8mb4_unicode_ci',
+        //     'prefix' => '',
+        //     'strict' => true,
+        //     'engine' => null,
+		// 	'modes'  => [
+        //     'ONLY_FULL_GROUP_BY',
+        //     'STRICT_TRANS_TABLES',
+        //     'NO_ZERO_IN_DATE',
+        //     'NO_ZERO_DATE',
+        //     'ERROR_FOR_DIVISION_BY_ZERO',
+        //     'NO_ENGINE_SUBSTITUTION',
+		// 	],
+        // ],
 
         'pgsql' => [
             'driver' => 'pgsql',
