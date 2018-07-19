@@ -1,6 +1,7 @@
 <?php
 
 use App\User;
+use App\About;
 use jeremykenedy\LaravelRoles\Models\Role;
 use jeremykenedy\LaravelRoles\Models\Permission;
 use Illuminate\Database\Eloquent\Model;
@@ -37,6 +38,9 @@ class UsersTableSeeder extends Seeder
 			foreach ($permissions as $permission) {
 				$newUser->attachPermission($permission);
 			}
+		 $about = new About;
+		 $about->user_id = $newUser->id;
+		 $about->save();
 
         }
 
@@ -50,6 +54,10 @@ class UsersTableSeeder extends Seeder
 
 	        $newUser;
 	        $newUser->attachRole($userRole);
+		
+		$about = new About;
+		$about->user_id = $newUser->id;
+		$about->save();
 
         }
 
